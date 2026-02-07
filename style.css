@@ -44,6 +44,23 @@ canvas {
   max-width: 90%;
 }
 
+/* NORMAL MODE */
+body {
+  background: #121212;
+  color: #eee;
+}
+
+body textarea {
+  font-size: 1.2rem;
+  border: 2px solid #555;
+  background: #222;
+  color: #fff;
+}
+
+body #exercise {
+  font-size: 1.8rem;
+}
+
 body.kid {
   background: #1b5e20;
   color: #fff;
@@ -64,5 +81,6 @@ body.kid button {
   font-size: 1.2rem;
   padding: 8px 14px;
 }
+
 
 
