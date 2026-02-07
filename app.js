@@ -1,3 +1,14 @@
+const modeToggle = document.getElementById("modeToggle");
+
+modeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("kid");
+
+  modeToggle.textContent =
+    document.body.classList.contains("kid")
+      ? "Normal Mode"
+      : "Kid Mode";
+});
+
 let idx = 0;
 let start = null;
 let errors = 0;
@@ -58,4 +69,5 @@ function saveLog(log) {
 }
 
 load();
+
 
