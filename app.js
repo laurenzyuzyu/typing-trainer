@@ -1,3 +1,13 @@
+const fingerMap = {
+  a: "L_PINKY",
+  s: "L_RING",
+  d: "L_MIDDLE",
+  f: "L_INDEX",
+  j: "R_INDEX",
+  k: "R_MIDDLE",
+  l: "R_RING",
+};
+
 const modeToggle = document.getElementById("modeToggle");
 
 modeToggle.addEventListener("click", () => {
@@ -33,6 +43,8 @@ input.addEventListener("input", () => {
   if (!start) start = Date.now();
 
   const expected = exercises[idx].text;
+  highlightFinger(expected[0]);
+
   const typed = input.value;
   errors = 0;
 
@@ -60,6 +72,9 @@ input.addEventListener("input", () => {
     idx = (idx + 1) % exercises.length;
     load();
   }
+const nextChar = expected[typed.length];
+highlightFinger(nextChar);
+
 });
 
 function saveLog(log) {
@@ -68,6 +83,28 @@ function saveLog(log) {
   localStorage.setItem("logs", JSON.stringify(data));
 }
 
+function highlightFinger(char) {
+  const obj = document.getElementById("fingerSvg");
+  if (!obj || !obj.contentDocument) return;
+
+  const svgDoc = obj.contentDocument;
+
+  // Reset all fingers
+  svgDoc.querySelectorAll(".finger").forEach(f => {
+    f.classList.remove("active");
+  });
+
+  // Highlight correct finger
+  const fingerId = fingerMap[char?.toLowerCase()];
+  if (!fingerId) return;
+
+  const finger = svgDoc.getElementById(fingerId);
+  if (finger) {
+    finger.classList.add("active");
+  }
+}
+
 load();
+
 
 
