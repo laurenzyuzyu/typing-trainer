@@ -5,6 +5,10 @@ let errors = 0;
 const exEl = document.getElementById("exercise");
 const input = document.getElementById("input");
 
+const wps = document.getElementById("wps");
+const accuracy = document.getElementById("accuracy");
+const errorsEl = document.getElementById("errors");
+
 function load() {
   input.value = "";
   errors = 0;
@@ -54,3 +58,4 @@ function saveLog(log) {
 }
 
 load();
+
