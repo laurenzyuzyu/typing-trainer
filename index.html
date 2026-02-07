@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Typing Trainer</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4CAF50">
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="kid">
+
+<header>
+  <h1>⌨️ Typing Trainer</h1>
+  <button id="modeToggle">Kid Mode</button>
+</header>
+
+<section id="exercise"></section>
+
+<textarea id="input" placeholder="Start typing..." autofocus></textarea>
+
+<section id="stats">
+  <span id="wps"></span>
+  <span id="errors"></span>
+  <span id="accuracy"></span>
+</section>
+
+<section id="fingerGuide">
+  <object data="fingers.svg" type="image/svg+xml"></object>
+</section>
+
+<section id="progress">
+  <h2>Progress</h2>
+  <canvas id="progressChart"></canvas>
+</section>
+
+<script src="exercises.js"></script>
+<script src="progress.js"></script>
+<script src="app.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+
+</body>
+</html>
