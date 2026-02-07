@@ -82,5 +82,20 @@ body.kid button {
   padding: 8px 14px;
 }
 
+/* Kid mode fun animations */
+@keyframes kidPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+body.kid #exercise {
+  animation: kidPulse 1.2s infinite;
+}
+
+body.kid textarea {
+  animation: kidPulse 1.5s infinite;
+}
+
 
 
