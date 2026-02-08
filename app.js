@@ -84,6 +84,8 @@ function saveLog(log) {
 }
 
 function highlightFinger(char) {
+  if (!char) return;
+
   const obj = document.getElementById("fingerSvg");
   if (!obj || !obj.contentDocument) return;
 
@@ -94,8 +96,7 @@ function highlightFinger(char) {
     f.classList.remove("active");
   });
 
-  // Highlight correct finger
-  const fingerId = fingerMap[char?.toLowerCase()];
+  const fingerId = fingerMap[char.toLowerCase()];
   if (!fingerId) return;
 
   const finger = svgDoc.getElementById(fingerId);
@@ -104,7 +105,9 @@ function highlightFinger(char) {
   }
 }
 
+
 load();
+
 
 
 
