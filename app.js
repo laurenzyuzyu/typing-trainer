@@ -54,6 +54,7 @@ iinput.addEventListener("input", () => {
   const typed = input.value;
   const nextChar = expected[typed.length];
 
+  console.log("nextChar:", nextChar);
   highlightFinger(nextChar);
 
   if (typed === expected) {
@@ -104,6 +105,7 @@ function loadExercise() {
 
 
 load();
+
 
 
 
