@@ -1,3 +1,5 @@
+console.log("app.js loaded");
+
 const fingerMap = {
   a: "L_PINKY",
   s: "L_RING",
@@ -105,6 +107,7 @@ function loadExercise() {
 
 
 load();
+
 
 
 
