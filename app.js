@@ -48,7 +48,7 @@ function load() {
   exEl.innerHTML = [...text].map(c => `<span>${c}</span>`).join("");
 }
 
-iinput.addEventListener("input", () => {
+input.addEventListener("input", () => {
   if (!start) start = Date.now();
 
   const typed = input.value;
@@ -105,6 +105,7 @@ function loadExercise() {
 
 
 load();
+
 
 
 
