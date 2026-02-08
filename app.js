@@ -8,6 +8,15 @@ const fingerMap = {
   l: "R_RING",
 };
 
+let svgReady = false;
+
+let expected = "";
+
+const fingerObject = document.getElementById("fingerSvg");
+fingerObject.addEventListener("load", () => {
+  svgReady = true;
+});
+
 const modeToggle = document.getElementById("modeToggle");
 
 modeToggle.addEventListener("click", () => {
@@ -39,43 +48,21 @@ function load() {
   exEl.innerHTML = [...text].map(c => `<span>${c}</span>`).join("");
 }
 
-input.addEventListener("input", () => {
+iinput.addEventListener("input", () => {
   if (!start) start = Date.now();
 
-  const expected = exercises[idx].text;
-  highlightFinger(expected[0]);
-
   const typed = input.value;
-  errors = 0;
+  const nextChar = expected[typed.length];
 
-  [...exEl.children].forEach((s, i) => {
-    if (!typed[i]) s.className = "";
-    else if (typed[i] === expected[i]) s.className = "correct";
-    else {
-      s.className = "incorrect";
-      errors++;
-    }
-  });
-
-  const t = Date.now() - start;
-  const chars = typed.length;
-  const wps = t ? ((chars / 5) / t) * 1000 : 0;
-  const acc = chars ? ((chars - errors) / chars) * 100 : 100;
-
-  wps.textContent = `WPS: ${wps.toFixed(1)}`;
-  accuracy.textContent = `Accuracy: ${acc.toFixed(0)}%`;
-  errorsEl.textContent = `Errors: ${errors}`;
+  highlightFinger(nextChar);
 
   if (typed === expected) {
-    saveLog({ wps, acc, level: exercises[idx].level });
-    unlockNext();
-    idx = (idx + 1) % exercises.length;
-    load();
+    loadExercise();
   }
-const nextChar = expected[typed.length];
-highlightFinger(nextChar);
-
 });
+);
+
+loadExercise();
 
 function saveLog(log) {
   const data = JSON.parse(localStorage.getItem("logs") || "[]");
@@ -87,7 +74,7 @@ function highlightFinger(char) {
   if (!char) return;
 
   const obj = document.getElementById("fingerSvg");
-  if (!obj || !obj.contentDocument) return;
+  if (!svgReady) return;
 
   const svgDoc = obj.contentDocument;
 
@@ -105,8 +92,19 @@ function highlightFinger(char) {
   }
 }
 
+function loadExercise() {
+  expected = exercises[idx].text;
+  exerciseEl.textContent = expected;
+  input.value = "";
+
+  highlightFinger(expected[0]);
+
+  idx = (idx + 1) % exercises.length;
+}
+
 
 load();
+
 
 
 
